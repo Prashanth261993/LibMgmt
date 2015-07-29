@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="myjs.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>RB Library</h2>
+<div class="signin" id="signindiv">
+  <%= form_for :session, url: sessions_path, :html => {:class =>'signinform'}   do |f| %>
+    <%= f.label :Email %><br>
+    <%= f.email_field :usermail %>
+  </p>
+   <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+      
+      <p>
+        <%= f.submit :Login %>
+  </p>
+  <a href="#" id="signupshow">Sign Up</a>
+<% end %>
+ 
+</div>
+
+<div class="signup" id="signupdiv">
+	<%= form_for :welcome, url: welcomes_path do |f| %>
+  <p>
+    <%= f.label :Email %><br>
+    <%= f.text_field :usermail %>
+  </p>
+   <p>
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </p>
+ 
+  <p>
+    <%= f.label :age %><br>
+    <%= f.text_field :age %>
+  </p>
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile %>
+  </p>
+  <p>
+    <%= f.label :usertype %><br>
+    <%= f.text_field :usertype %>
+  </p>
+ 
+ 
+  <p>
+    <%= f.submit :Signup! %>
+  </p>
+  <a href="#" id="signinshow">Login!</a>
+<% end %>
+</div>
+</div>
+<%= javascript_include_tag('myjs.js') %>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<body>
+<p>Hello</p>
+<%= form_for :welcome do |f| %>
+  <p>
+    <%= f.label :Email %><br>
+    <%= f.text_field :usermail %>
+  </p>
+ 
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password :password %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+</form>
+</body>
+</html>
