@@ -1,0 +1,65 @@
+<html>
+
+<head>
+	 <link rel="stylesheet" type="text/css" href="style.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+	<div class="strip">
+		<center><h1> RB Library</h1></center>
+		<span class="userspan" id="userspan1">
+			<%= @user.usermail %> 
+			<span class="logoutspan" id="logout1">
+				<%= link_to "Change Password" %>
+				<%= link_to "Logout", session_path(id: @user.id) ,method: :delete %>
+			</span>
+		</span>
+	</div>
+	<div class="sidemenu">
+		<li><%= link_to "My Bag", user_path(id: @user.id) %></li>
+		<li><%= link_to "Fill My Bag", books_path(id: @user.id) %></li>
+		<li><%= link_to "Update Me", edit_user_path(id: @user.id) %></li>
+
+	</div>
+	<div id="flash">
+  		<% flash.each do |key, value| %>
+      <div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+  	 <% end %>
+  
+	</div>
+	<div class="">
+	<h2 style="margin-left:300px;">My Profile</h2>
+	 <!--<#%= flash[:success] %> -->
+	 <%= form_for :user_update ,url: user_path(id: @user.id), method: "put", :html => {:class =>'editprofileform'} do |f| %>
+	<table class="editprofiletable">
+
+	  <tr>
+	    <td>Mail</td>
+	    <td id="mail1"><%= f.text_field :usermail, :value=>@user.usermail, :disabled=>"disabled" %></td>
+	    <td ><input class="profileeditbutton" id="b1" type="button" value="edit"></td>
+	  </tr>
+	  <tr>
+	    <td>Age</td>
+	    <td><%= f.text_field :age, :value=>@user.age, :disabled=>"disabled" %></td>
+	    <td ><input class="profileeditbutton" id="b3" type="button" value="edit"></td>
+	  </tr>
+	  <tr>
+	    <td>Address</td>
+	    <td><%= f.text_field :address, :value=>@user.address, :disabled=>"disabled" %></td>
+	    <td ><input class="profileeditbutton" id="b4" type="button" value="edit"></td>
+	  </tr>
+	  <tr>
+	    <td>Mobile</td>
+	    <td><%= f.text_field :mobile, :value=>@user.mobile, :disabled=>"disabled" %></td>
+	    <td ><input class="profileeditbutton" id="b5" type="button" value="edit"></td>
+	  </tr>
+</table>
+<%= f.submit("Update") %>
+<% end %>
+</div> 
+<%= javascript_include_tag('myjs.js') %>
+<%= javascript_include_tag('editfun.js') %>
+</body>
+</html>

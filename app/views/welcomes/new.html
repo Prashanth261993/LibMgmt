@@ -1,64 +1,58 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="myjs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <div class="container">
     <h2>RB Library</h2>
 <div class="signin" id="signindiv">
+  <br>
   <%= form_for :session, url: sessions_path, :html => {:class =>'signinform'}   do |f| %>
-    <%= f.label :Email %><br>
-    <%= f.email_field :usermail %>
-  </p>
-   <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-      
+    <p>
+      <%= f.email_field :usermail, :placeholder=>'email' %>
+    </p>
+     <p>
+       <%= f.password_field :password, :placeholder=>'password' %>
+      </p>
       <p>
         <%= f.submit :Login %>
-  </p>
+      </p>
   <a href="#" id="signupshow">Sign Up</a>
 <% end %>
  
 </div>
 
 <div class="signup" id="signupdiv">
-	<%= form_for :welcome, url: welcomes_path do |f| %>
+	<%= form_for :welcome, url: welcomes_path, html:{:id=>'signupform'} do |f| %>
   <p>
-    <%= f.label :Email %><br>
-    <%= f.text_field :usermail %>
+    <%= f.email_field :usermail, :placeholder=>'email',:id=>'email1'  %>
   </p>
-   <p>
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
+  <p>
+    <%= f.password_field :password, :placeholder=>'password',:id=>'password1'  %>
+    <span id="passerror" class="validerror">*Your password must be minimum 6 characters </span>
   </p>
+    
+  <p>
+    <%= f.text_field :age, :placeholder=>'age', :id=>'age1' %>
+    <span id="ageerror" class="validerror">*Enter a valid age </span>
+  </p>
+  <p>
+    <%= f.text_field :address, :placeholder=>'address'%>
+  </p>
+  <p>
+    <%= f.text_field :mobile, :placeholder=>'mobile', :id=>'mobile1'%>
+    <span id="mobileerror" class="validerror">*Enter a valid mobile no </span>
+  </p> 
  
   <p>
-    <%= f.label :age %><br>
-    <%= f.text_field :age %>
-  </p>
-  <p>
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </p>
-  <p>
-    <%= f.label :mobile %><br>
-    <%= f.text_field :mobile %>
-  </p>
-  <p>
-    <%= f.label :usertype %><br>
-    <%= f.text_field :usertype %>
-  </p>
- 
- 
-  <p>
-    <%= f.submit :Signup! %>
+    <%= f.submit :Signup!, :id=>'signupsubmit' %>
+    <span id="submiterror" class="validerror">*Enter all mandatory fields </span>
   </p>
   <a href="#" id="signinshow">Login!</a>
 <% end %>
 </div>
 </div>
-<%= javascript_include_tag('myjs.js') %>
+ <%= javascript_include_tag('myjs.js') %>
 </body>
 </html>

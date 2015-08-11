@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	 <link rel="stylesheet" type="text/css" href="style.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+	<div class="strip">
+		<center><h1> RB Library</h1></center>
+		<span class="userspan" id="userspan1">
+			<%= @user.usermail %> 
+			<span class="logoutspan" id="logout1">
+				<%= link_to "Change Password" %>
+				<%= link_to "Logout", session_path(id: @user.id) ,method: :delete %>
+			</span>
+		</span>
+	</div>
+	</div>
+	<div class="sidemenu">
+		<li><%= link_to "My Bag", user_path(id: @user.id) %></li>
+		<li><%= link_to "Fill My Bag", books_path(id: @user.id) %></li>
+		<li><%= link_to "Update Me", edit_user_path(id: @user.id) %></li>
+
+	</div>
+	<div id="flash">
+  		<% flash.each do |key, value| %>
+      <div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+  	 <% end %>
+    <%= yield %>
+	</div>
+	
+	<h2 style="margin-left:300px;">My Bag</h2>
+	<!--<#%= flash[:success] %> -->
+	 <%if @books.size == 0%>
+	 	 <p>No books are available</p>
+	  <%else%>
+	<table class="booktable">
+	  <tr class="tablehead">
+	    <th>Title</th>
+	    <th>Author</th>
+	    <th>Price</th>
+	    <th>Due Date</th>
+	    <th>Return</th>
+	  </tr>
+	
+	<% @books.each do |book| %>
+	  <tr>
+	    <td><%= book.title %></td>
+	    <td><%= book.author %></td>
+	    <td><%= book.price %></td>
+	    <td><%= book.due_date %></td>
+	     <td><%= link_to "RETURN", remove_user_book_user_path(id: @user.id, book_id: book.id ), method: :post, data: { confirm: "Are you sure?" }, :class =>'returnbutton' %></td>
+	  </tr>
+	<% end %>
+</table>
+<%end%>
+</body>
+<%= javascript_include_tag('myjs.js') %>
+</html>

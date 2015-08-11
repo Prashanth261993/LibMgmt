@@ -1,0 +1,25 @@
+
+	<table class="booktable">
+	  <tr class="tablehead">
+	    <th>Title</th>
+	    <th>Author</th>
+	    <th>Price</th>
+	    <th>Return</th>
+	  </tr>
+	  
+	<% @books.each do |book| %>
+	  <tr>
+	    <td><%= book.title %></td>
+	    <td><%= book.author %></td>
+	    <td><%= book.price %></td>
+
+	     <td><% if book.userdb_id == 0 %>
+	     	<%= check_box_tag  "activated[]", book.id %> 
+	     	 <% else %>
+	     	 <span> Can't be removed now</span>
+	     	 <% end %>
+	     </td>
+	  </tr>
+	<% end %>
+
+</table>

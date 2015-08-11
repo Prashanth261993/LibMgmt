@@ -5,9 +5,11 @@ class CreateUserdbs < ActiveRecord::Migration
       t.string :password
       t.integer :age
       t.string :address
-      t.integer :mobile
-      t.integer :usertype
+      t.integer :mobile, :limit=>8
+      t.integer :usertype, :default=>2
       t.timestamps null: false
     end
+      add_index :userdbs, :usermail, :unique => true
   end
+
 end

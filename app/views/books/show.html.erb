@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<head>
+	 <link rel="stylesheet" type="text/css" href="style.css">
+  	
+  	 <meta name="viewport" content="width=device-width, initial-scale=1">
+  	 <script>
+  	 /*	function addevents()
+  	 	{
+
+  	 		//alert("ok");
+
+  	 	
+  	 		$('#books_search_input').keyup(
+	alert("ok");
+	$.get($("#books_search").attr("action"), $("#books_search").serialize(), null, 'script') false );
+
+	//alert("hi");
+  $.ajax({
+  	url: 'http://localhost:3000/books/live_search',
+  	data: {
+  		search: $("#books_search_input").val();
+  	},
+  	error: function(){
+  		$('#bookresults_div').append.html('<p>Error occured</p>');
+  	},
+  	dataType: 'json',
+
+      success: function(data) { var $title = $('<h1>').text(data. talks[0].talk_title);
+      var $description = $('<p>').text(data.talks[0].talk_description);
+        $('#info').append($title).append($description); 
+
+        for( obj in data)
+        {
+        	var $title = $('<p>').text(obj.title);
+        	$('#bookresults_div').append($title)
+        }
+    }, 
+      type: 'GET'
+
+  });
+
+);
+$('#books_search_input').keyup($.post($("#books_search").attr("action"), $("#books_search").serialize(), null, 'script') false ););
+
+$("#bookresults_div").html("<%= escape_javascript(render "books") %>")
+// Ajax search on keyup 
+
+
+$('#books_search').submit( $.post(this.action, $(this).serialize(), null, 'script') false );
+  	 	}*/
+  	 </script>
+</head>
+<body>
+
+<div class="container">
+	<div class="strip">
+		<center><h1> RB Library</h1></center>
+		<span class="userspan" id="userspan1">
+			<%= @user.usermail %> 
+			<span class="logoutspan" id="logout1">
+				<%= link_to "Change Password" %>
+				<%= link_to "Logout", session_path(id: @user.id) ,method: :delete %>
+			</span>
+		</span>
+	</div>
+	
+	<div class="sidemenu">
+		<li><%= link_to "My Bag", user_path(id: @user.id) %></li>
+		<li><%= link_to "Fill My Bag", books_path(id: @user.id) %></li>
+		<li><%= link_to "Update Me", edit_user_path(id: @user.id) %></li>
+		<li><%= link_to "Experiment", book_path(id: @user.id) %></li>
+
+	</div>
+
+  
+
+ <%= text_field_tag :search, params[:search],:id => "books_search_input" %>
+  
+
+ <%= form_tag books_path(id: @user.id), :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
+ <div id="bookresults_div"><%= render 'books' %>
+ 	</div> 
+  <%= text_field_tag :userdb_id,  @user.id, :style=>'display:none;'  %>
+  <%= submit_tag("ADD TO MY BAG") %>
+ 	<% end %> 
+</div>
+
+<%= javascript_include_tag('live_search.js') %>
+</body>
+</html>
