@@ -1,15 +1,17 @@
 class BooksController < ApplicationController
 
-before_action :correct_user,  :except => [:search,:live_search]
+before_action :authenticate_userdb!,  :except => [:search,:live_search]
 
 	def index
-		@user = Userdb.find(params[:id].to_i)
+		#@user = Userdb.find(params[:id].to_i)
+		@user = current_userdb
 		@books = Book.all
 	end
 
 	def search
 		
-		@user = Userdb.find(session[:user_id].to_i)
+		#@user = Userdb.find(session[:user_id].to_i)
+		@user = current_userdb
 		@books = Book.where("title LIKE ? OR author LIKE ?" ,"%#{params[:book][:search]}%","%#{params[:book][:search]}%")
 		
 		#@books = Book.where("title LIKE %#{params[:book][:search]}% OR author LIKE %#{params[:book][:search]}%.to_s" )
@@ -30,7 +32,7 @@ before_action :correct_user,  :except => [:search,:live_search]
 			 	activated_ids.each do |id| 
 			 	book = Book.find_by_id(id) 
 			 	activity_record = Activity.new
-			 	activity_record.user_name = current_user.usermail
+			 	activity_record.user_name = current_userdb.email
 				activity_record.book_name = book.title
 				activity_record.taken = true
 				activity_record.userdb_id = userid
@@ -64,7 +66,7 @@ before_action :correct_user,  :except => [:search,:live_search]
 	end
 
 	def show 
-		@user = current_user
+		@user = current_userdb
 		@books = Book.all
 	end
 

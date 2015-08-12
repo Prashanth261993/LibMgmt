@@ -12,10 +12,10 @@
 	<div class="strip">
 		<center><h1> RB Library</h1></center>
 		<span class="userspan" id="userspan1">
-			<%= @user.usermail %> 
+			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password" %>
-				<%= link_to "Logout", session_path(id: @user.id) ,method: :delete %>
+				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
+				<%= link_to "Logout", destroy_userdb_session_path, method: :delete, :class => 'navbar-link'  %>
 			</span>
 		</span>
 	</div>

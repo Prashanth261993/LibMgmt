@@ -10,10 +10,12 @@
 	<div class="strip">
 		<center><h1> RB Library</h1></center>
 		<span class="userspan" id="userspan1">
-			<%= @user.usermail %> 
+			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password" %>
-				<%= link_to "Logout", session_path(id: @user.id) ,method: :delete %>
+			<% if userdb_signed_in? %>
+				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
+				<%= link_to "Logout", destroy_userdb_session_path, method: :delete, :class => 'navbar-link'  %>
+			<% end %>
 			</span>
 		</span>
 	</div>
@@ -37,7 +39,7 @@
 
 	  <tr>
 	    <td>Mail</td>
-	    <td id="mail1"><%= f.text_field :usermail, :value=>@user.usermail, :disabled=>"disabled" %></td>
+	    <td id="mail1"><%= f.text_field :email, :value=>@user.email, :disabled=>"disabled" %></td>
 	    <td ><input class="profileeditbutton" id="b1" type="button" value="edit"></td>
 	  </tr>
 	  <tr>

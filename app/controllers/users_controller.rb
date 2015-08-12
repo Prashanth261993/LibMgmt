@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
-	before_action :correct_user
+	before_action :authenticate_userdb!
 
 	def edit
-		@user = Userdb.find(params[:id].to_i)
+		#@user = Userdb.find(params[:id].to_i)
+		@user = current_userdb
 	end
 
 	def show
 	
-		@user = Userdb.find(params[:id].to_i)
+		#@user = Userdb.find(params[:id].to_i)
+		@user = current_userdb
 		if @user.usertype == 2
 			@books=@user.books
 			@books.each do |b| 
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
 			end
 
 		else
-			 redirect_to controller: :admin, action: :show, id: params[:id]
+			 redirect_to controller: :admin, action: :show, id: @user.id
 		end
 
 	end
@@ -31,7 +33,7 @@ class UsersController < ApplicationController
 		book = Book.find(params[:book_id].to_i)
 		book.update_attributes!(userdb_id: 0)
 		activity_record = Activity.new
-		activity_record.user_name = current_user.usermail
+		activity_record.user_name = current_user.email
 		activity_record.book_name = book.title
 		activity_record.taken = false
 		activity_record.userdb_id = current_user.id
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
 		redirect_to controller: :users, action: :show, id: params[:id]
 	end
 	def update
-		@user = Userdb.find(params[:id].to_i)
+		@user = current_userdb
 		if params[:user_update].present?
 			if @user.update(update_params)
 				flash[:success] = "Successfullly updated"

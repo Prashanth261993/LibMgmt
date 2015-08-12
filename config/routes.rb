@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  root "welcomes#new"
-  get 'new' =>'sessions#new' 
+  devise_for :userdbs
+  #get 'sessions/new'
+  root "users#show"
+  #get 'new' =>'sessions#new' 
   
 
 
-  resources :sessions
+  #resources :sessions
   resources :books 
   resources :admin
   resources :welcomes

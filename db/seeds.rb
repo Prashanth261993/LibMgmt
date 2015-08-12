@@ -8,7 +8,7 @@
 	Book.create(title: 'book1', author: 'author1', price: '10', userdb_id: '2')
 	Book.create(title: 'book2', author: 'author2', price: '10')
 	Book.create(title: 'book3', author: 'author3', price: '10', userdb_id: '2')
-	Book.create(title: 'book4', author: 'author2', price: '10', userdb_id: '1')
+	Book.create(title: 'book4', author: 'author2', price: '10', userdb_id: '2')
 	Book.create(title: 'book5', author: 'author4', price: '10')
 	Userdb.create(usermail: 'admin@gmail.com', password: '1234567',usertype: '1')
 	
