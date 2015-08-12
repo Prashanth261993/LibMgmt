@@ -2,55 +2,9 @@
 
 <head>
 	 <link rel="stylesheet" type="text/css" href="style.css">
-  	
-  	 <meta name="viewport" content="width=device-width, initial-scale=1">
-  	 <script>
-  	 /*	function addevents()
-  	 	{
-
-  	 		//alert("ok");
-
-  	 	
-  	 		$('#books_search_input').keyup(
-	alert("ok");
-	$.get($("#books_search").attr("action"), $("#books_search").serialize(), null, 'script') false );
-
-	//alert("hi");
-  $.ajax({
-  	url: 'http://localhost:3000/books/live_search',
-  	data: {
-  		search: $("#books_search_input").val();
-  	},
-  	error: function(){
-  		$('#bookresults_div').append.html('<p>Error occured</p>');
-  	},
-  	dataType: 'json',
-
-      success: function(data) { var $title = $('<h1>').text(data. talks[0].talk_title);
-      var $description = $('<p>').text(data.talks[0].talk_description);
-        $('#info').append($title).append($description); 
-
-        for( obj in data)
-        {
-        	var $title = $('<p>').text(obj.title);
-        	$('#bookresults_div').append($title)
-        }
-    }, 
-      type: 'GET'
-
-  });
-
-);
-$('#books_search_input').keyup($.post($("#books_search").attr("action"), $("#books_search").serialize(), null, 'script') false ););
-
-$("#bookresults_div").html("<%= escape_javascript(render "books") %>")
-// Ajax search on keyup 
-
-
-$('#books_search').submit( $.post(this.action, $(this).serialize(), null, 'script') false );
-  	 	}*/
-  	 </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
 
 <div class="container">

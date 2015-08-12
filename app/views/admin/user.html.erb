@@ -1,12 +1,14 @@
 <html>
 
-<head>
-	 <link rel="stylesheet" type="text/css" href="style.css">
-  	 <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+	<head>
+		 <link rel="stylesheet" type="text/css" href="style.css">
+	  	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
 
-<div class="container">
+	<body>
+
+		<div class="container">
+
 	<div class="strip">
 		<center><h1> RB Library</h1></center>
 		<span class="userspan" id="userspan1">
@@ -17,44 +19,64 @@
 			</span>
 		</span>
 	</div>
+
 	<div class="sidemenu">
-		<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
-		<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
-		<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
-		<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
+
+				<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
+				<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
+				<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
+				<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
+
+			</div>
+
+			<div class="inner-container">
+
+				<div id="flash">
+			  		<% flash.each do |key, value| %>
+			      	<div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+			  	 	<% end %>
+				</div>
+
+				<div class="accorddiv">
+				
+					<% @users.each do |u|%>
+
+					<%if u.usertype == 2%>
+
+					    <div class="accordionItem">
+					  	  <h2><%= u.usermail %><%= form_tag  user_remove_admin_path(id: @user.id), :method => 'post' do%>
+						  	<%= text_field_tag :userdb_id,  u.id, :style=>'display:none;'  %>
+						  	<%= submit_tag("Remove") %><% end %></h2>
+					  
+						  <div>
+
+						  	 <% u.activities.each do |a| %>
+
+						  	  	<% if a.taken == false %>
+							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+							    <% else %>
+							    <p class="borrowfeed"><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+						   		 <% end %>
+						   		 <% end %>
+
+						  </div>
+
+						</div>
+
+					<% end %>
+					<% end %>
+				
+			</div>
+
+		</div>
 
 	</div>
-	<div id="flash">
-  		<% flash.each do |key, value| %>
-      <div class="flash-box-<%= key %>" id="flash"><%= value %></div>
-  	 <% end %>
-    <%= yield %>
-	</div>
-	<div class="accorddiv">
-	
-	<% @users.each do |u|%>
-	<%if u.usertype == 2%>
-	  <div class="accordionItem">
-  	  <h2><%= u.usermail %><%= form_tag  user_remove_admin_path(id: @user.id), :method => 'post' do%>
-	  	<%= text_field_tag :userdb_id,  u.id, :style=>'display:none;'  %>
-	  	<%= submit_tag("Remove") %><% end %></h2>
-	  
-	  <div>
-	  	 <% u.activities.each do |a| %>
-	  	  	<% if a.taken == false %>
-		    <p><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-		    <% else %>
-		    <p><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-	   		 <% end %>
-	   		 <% end %>
-	  </div>
-	</div>
-	<% end %>
-	<% end %>
-	
-</div>
-</div>
-<%= javascript_include_tag('myjs.js') %>
-<%= javascript_include_tag('accordian.js') %>
-</body>
+
+	<%= javascript_include_tag('myjs.js') %>
+	<%= javascript_include_tag('accordian.js') %>
+
+	</body>
+
 </html>

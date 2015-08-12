@@ -5,9 +5,11 @@
   	 <script src="myjs.js"></script>
   	 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
 
 <div class="container">
+
 	<div class="strip">
 		<center><h1> RB Library</h1></center>
 		<span class="userspan" id="userspan1">
@@ -26,57 +28,65 @@
 		<li><%= link_to "Experiment", book_path(id: @user.id) %></li>
 
 	</div>
-	<div id="flash">
-  		<% flash.each do |key, value| %>
-      <div class="flash-box-<%= key %>" id="flash"><%= value %></div>
-  	 <% end %>
-    <%= yield %>
-	</div>
 
-	<%= form_for :book ,url: search_books_path, :method => 'post', html:{:id=>'books_search', :class=>"search_form"} do |b|%>
+	<div class="inner-container">
+		
+		<div id="flash">
+  		<% flash.each do |key, value| %>
+      	<div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+  	 	<% end %>
+  	 	</div>
+
+		<h2>Fill My Bag</h2>
+		<%= form_for :book ,url: search_books_path, :method => 'post', html:{:id=>'books_search', :class=>"search_form"} do |b|%>
 
 	    <%= b.text_field :search , :id=>"search_input"%>
 	    <%= b.submit ("Search") %>
-	<% end %>
+		<% end %>
 	
-	<div class="borrowdiv">
-	<h2 style="margin-left:300px;">My Bag</h2>
-	 <!--<#%= flash[:success] %> -->
-	 <%if @books.size == 0%>
-	 	 <p>No matches are available</p>
-	  <%else%>
-	 <%= form_tag books_path(id: @user.id), :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
+		<div class="borrowdiv">
+			 <%if @books.size == 0%>
+			 	 <p class="search-result">No matches are available</p>
+			  <%else%>
+			 <%= form_tag books_path(id: @user.id), :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
 
-	<table class="booktable">
-	  <tr class="tablehead">
-	    <th>Title</th>
-	    <th>Author</th>
-	    <th>Price</th>
-	    <th>Return</th>
-	  </tr>
-	  
-	<% @books.each do |book| %>
-	  <tr>
-	    <td><%= book.title %></td>
-	    <td><%= book.author %></td>
-	    <td><%= book.price %></td>
+			<table class="booktable">
+			  <tr class="tablehead">
+			    <th>Title</th>
+			    <th>Author</th>
+			    <th>Price</th>
+			    <th>Return</th>
+			  </tr>
+			  
+			<% @books.each do |book| %>
+			  <tr>
+			    <td><%= book.title %></td>
+			    <td><%= book.author %></td>
+			    <td><%= book.price %></td>
 
-	     <td><% if book.userdb_id == 0 %>
-	     	<%= check_box_tag  "activated[]", book.id %> 
-	     	 <% else %>
-	     	 <span> Not Available</span>
-	     	 <% end %>
-	     </td>
-	  </tr>
-	<% end %>
+			     <td><% if book.userdb_id == 0 %>
+			     	<%= check_box_tag  "activated[]", book.id %> 
+			     	 <% else %>
+			     	 <span> Not Available</span>
+			     	 <% end %>
+			     </td>
+			  </tr>
+			<% end %>
+			</table>
 
-</table>
-<%= text_field_tag :userdb_id,  @user.id, :style=>'display:none;'  %>
-<%= submit_tag("ADD TO MY BAG") %>
-<% end %>
-<%end%>
-</div> 
+			<%= text_field_tag :userdb_id,  @user.id, :style=>'display:none;'  %>
+			<%= submit_tag("ADD TO MY BAG") %>
+			<% end %>
+			<%end%>
+
+		</div> 
+
+	</div>
+
 </div>
+
 <%= javascript_include_tag('myjs.js') %>
+
 </body>
+
 </html>

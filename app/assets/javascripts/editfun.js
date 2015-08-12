@@ -19,10 +19,7 @@ function nextClickListener()
 
 }
 
-function callback()
-{
-	console.log("asdasdasd")
-}
+
 function updateProfile()
 {
 	var request = new XMLHttpRequest(); 

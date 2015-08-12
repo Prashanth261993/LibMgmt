@@ -1,12 +1,16 @@
 <html>
 
 <head>
-	 <link rel="stylesheet" type="text/css" href="style.css">
-  	 <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
 
-<div class="container">
+		 <link rel="stylesheet" type="text/css" href="style.css">
+	  	 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+	<body>
+
+		<div class="container">
+
 	<div class="strip">
 		<center><h1> RB Library</h1></center>
 		<span class="userspan" id="userspan1">
@@ -17,62 +21,88 @@
 			</span>
 		</span>
 	</div>
-	<div class="sidemenu">
-		<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
-		<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
-		<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
-		<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
 
-	</div>
-	<div id="flash">
-  		<% flash.each do |key, value| %>
-      <div class="flash-box-<%= key %>" id="flash"><%= value %></div>
-  	 <% end %>
-    <%= yield %>
-	</div>
-	<div class="accorddiv">
-	
-	  <div class="accordionItem">
-  	  <h2><%= Time.now.to_date %></h2>
+			<div class="sidemenu">
+				<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
+				<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
+				<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
+				<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
+
+			</div>
+			<div class="inner-container">
+
+				<div id="flash">
+			  		<% flash.each do |key, value| %>
+			      	<div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+			  		 <% end %>
+				</div>
+
+				<div class="accorddiv">
+				
+					  <div class="accordionItem">
+
+					  	  <h2><%= Time.now.to_date %></h2>
 	 
-	  <div>
-	  	 <% @activities_today.each do |a| %>
-	  	  	<% if a.taken == false %>
-		    <p><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-		    <% else %>
-		    <p><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-	   		 <% end %>
-	   		 <% end %>
-	  </div>
-	</div>
-	 <div class="accordionItem">
-	  <h2><%= Time.now.to_date - 1 %></h2>
-	  <div>
-	    <% @activities_yest.each do |a| %>
-	  	  	<% if a.taken == false %>
-		    <p><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-		    <% else %>
-		    <p><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-	   		 <% end %>
-	   		 <% end %>
-	  </div>
-	</div>
-	<div class="accordionItem">
-	  <h2><%= Time.now.to_date - 2 %></h2>
-	  <div>
-	    <% @activities_dayb4.each do |a| %>
-	  	  	<% if a.taken == false %>
-		    <p><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-		    <% else %>
-		    <p><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
-	   		 <% end %>
-	   		 <% end %>
-	  </div>
-	</div>
-	
-</div>
-</div>
-<%= javascript_include_tag('myjs.js') %>
-<%= javascript_include_tag('accordian.js') %>
-</body>
+						  <div>
+
+						  	 <% @activities_today.each do |a| %>
+
+						  	  	<% if a.taken == false %>
+							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+							    <% else %>
+							    <p class="borrowfeed"><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+						   		 <% end %>
+						   		 <% end %>
+						  </div>
+					</div>
+
+					 <div class="accordionItem">
+
+						  <h2><%= Time.now.to_date - 1 %></h2>
+						  <div>
+
+						    <% @activities_yest.each do |a| %>
+
+						  	  	<% if a.taken == false %>
+							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+							    <% else %>
+							    <p class="borrowfeed"><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+						   		 <% end %>
+						   		 <% end %>
+						  </div>
+					</div>
+
+					<div class="accordionItem">
+
+						  <h2><%= Time.now.to_date - 2 %></h2>
+						  <div>
+
+						    <% @activities_dayb4.each do |a| %>
+
+						  	  	<% if a.taken == false %>
+							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+							    <% else %>
+							    <p class="borrowfeed"><span class="userfeed"><%= a.user_name %></span> borrowed <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
+
+						   		 <% end %>
+						   		 <% end %>
+						  </div>
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+	<%= javascript_include_tag('myjs.js') %>
+	<%= javascript_include_tag('accordian.js') %>
+
+	</body>
+
 </html>

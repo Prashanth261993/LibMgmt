@@ -67,6 +67,16 @@ function formValidate()
 	});
 
 }
+
+$(document).ready(function(){
+  setTimeout(function(){
+    $("#flash").fadeTo(500, 0).slideUp(500, function()
+{
+$(this).remove();
+});
+}, 2000);
+ })
+
 /*function searchList()
 {
 	//alert("1");
@@ -98,5 +108,3 @@ function formValidate()
 formValidate();
 showSignUp();
 showSignIn();
-//formValidate();
-//searchList();

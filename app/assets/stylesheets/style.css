@@ -2,12 +2,20 @@ html, body {
   margin: 0px;
   padding: 0px;
   border: 0px;
+  
+}
+
+body
+{
+
+
+
 }
 
 .container
 {
-	
 	text-align: center;
+	height: 100%;
 
 }
 .container h2
@@ -189,8 +197,9 @@ html, body {
 
 .booktable
 {
-	width:601px;
-	margin-left: 350px;
+	width:60%;
+	margin-left: 200px;
+	margin-top: 20px;
 }
 
 /*.booktable tbody
@@ -235,9 +244,12 @@ html, body {
 {
 	text-decoration: none;
 	color: #456789;
-	border-radius: 3px;
+	border-radius: 5px;
 	margin-left: 3px;
 	font-size: 14px;
+	border: 1px solid #456789;;
+	background: #fff;
+	padding: 3px;
 }
 
 .returnbutton:hover
@@ -257,6 +269,7 @@ html, body {
 	height: 100%;
 	position: absolute;
 	text-align: left;
+	width:10%;
 }
 
 .sidemenu li
@@ -303,7 +316,7 @@ html, body {
 	background: #000;
 	border-color: #000;
 	color: #ccc;
-	margin-left:800px; 
+	margin-left:65%; 
 	margin-top: 15px;
 	transition:0.3s;
 	cursor: pointer;
@@ -366,7 +379,7 @@ html, body {
 	background: #000;
 	border-color: #000;
 	color: #ccc;
-	margin-left:850px; 
+	margin-left:70%; 
 	margin-top: 15px;
 	transition:0.3s;
 
@@ -381,8 +394,8 @@ html, body {
 
 .editprofiletable
 {
-	width:601px;
-	margin-left: 350px;
+	width:60%;
+	margin-left: 200px;
 
 }
 
@@ -439,8 +452,8 @@ html, body {
 .search_form
 {
 	
-	float: right;
-	margin-top: 100px;
+	margin-left: 200px;
+	display: inline;
 }
 
 .search_form input[type="text"]
@@ -464,7 +477,7 @@ html, body {
 	border-radius: 3px;
 	cursor: pointer;
 	transition:0.3s;
-	margin-right: 70px;
+	display: inline-block;
 }
 
 .search_form input[type="submit"]:hover
@@ -483,13 +496,12 @@ html, body {
 
 .accordionItem
 {
-	margin-left: 150px;
 	 border-radius: 10px;
 	 -webkit-transition: all 3s;
 	 text-align: left;
 }
 
-.accordionItem h2 
+.inner-container .accordionItem h2 
 { 
 	 margin :0px;
 	 font-size: 1.1em; 
@@ -498,6 +510,7 @@ html, body {
 	 background-color: #456789; 
 	 border-bottom: 1px solid #456789; 
 	 border-radius: 10px;
+	 display: block;
 }
 
 .accordionItem h2:hover 
@@ -535,6 +548,23 @@ html, body {
 	margin-top: 10px;
 
 }
+.accordionItem h2 form input[type="submit"]
+{
+	float: right;
+	display: inline;
+	margin-top: -20px;
+	border: 1px solid #456789;
+	background: #456789; 
+	cursor: pointer;
+	color: #fff;
+	transition:0.4s;
+
+}
+
+.accordionItem h2 form input[type="submit"]:hover
+{
+	color:#FFBABA;
+}
 
 .userfeed
 {
@@ -561,7 +591,7 @@ html, body {
 	border-radius: 15px;
 	margin: 10px;
 	margin-top: 70px;
-	margin-left: 450px;
+	margin-left: 350px;
 	text-align: center;
 }
 
@@ -586,31 +616,44 @@ html, body {
 {
 	border-radius: 5px;
 	background: #486347;
-	border-color: #486347;
-	color: #ccc;
+	border: 1px solid #486347;
+	color: #fff;
 	margin-top: 20px;
+	cursor: pointer;
+	transition:0.3s;
 
+}
+
+.addbook input[type="submit"]:hover
+{
+	background: #fff;
+	color: #486347;
 }
 
 .addbook a
 {
 	
-	margin-left: 240px;
+	margin-left: 0px;
 }
 
-.addbook h2
+.inner-container .addbook h2
 {
 	color: #486347;
+	margin-left: 0px;
 }
 
 .removediv a
 {
-	margin-left: 350px;
+	margin-left: 200px;
 }
 
 .removediv input[type="submit"]
 {
-	margin-left: 400px;
+	margin-left: 40%;
+}
+.removediv .search_form input[type="submit"]
+{
+	margin-left: 0%;
 }
 
 .flash-box-success
@@ -618,8 +661,7 @@ html, body {
 	color: #4F8A10;
     background: #DFF2BF;
     width: 300px;
-    margin-left: 500px;
-    margin-top: 20px;
+    margin-left: 300px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -629,8 +671,68 @@ html, body {
 	color: #4F8A10;
     background: #DFF2BF;
     width: 300px;
-    margin-left: 500px;
+    margin-left: 300px;
     margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
+}
+.flash-box-error
+{
+	color: #D8000C;
+    background: #FFBABA;
+    width: 300px;
+    margin-left: 300px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.inner-container
+{
+	margin-left: 10%;
+	width: 80%;
+	text-align: left;
+	padding: 20px;
+	padding-top:40px; 
+}
+
+.inner-container h2
+{
+	margin-left: 200px;
+	display: inline-block;
+	margin-top: 20px;
+
+}
+
+.search-result
+{
+	margin-left: 200px;
+}
+
+.returnfeed
+{
+	color: #00529B;
+}
+
+.borrowfeed
+{
+	color: #9F6000;
+}
+
+.userfeed
+{
+	font-weight: bold;
+}
+
+.bookfeed
+{
+	font-style: italic;
+}
+
+.timefeed
+{
+	color: #999;
+	font-style: oblique;
+	font-weight: bold;
+	font-size: 13px;
 }
