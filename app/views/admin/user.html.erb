@@ -44,7 +44,7 @@
 					<%if u.usertype == 2%>
 
 					    <div class="accordionItem">
-					  	  <h2><%= u.usermail %><%= form_tag  user_remove_admin_path(id: @user.id), :method => 'post' do%>
+					  	  <h2><%= u.email %><%= form_tag  user_remove_admin_path(id: @user.id), :method => 'post' do%>
 						  	<%= text_field_tag :userdb_id,  u.id, :style=>'display:none;'  %>
 						  	<%= submit_tag("Remove") %><% end %></h2>
 					  
