@@ -2,13 +2,11 @@ class UsersController < ApplicationController
 	before_action :authenticate_userdb!
 
 	def edit
-		#@user = Userdb.find(params[:id].to_i)
 		@user = current_userdb
 	end
 
 	def show
-	
-		#@user = Userdb.find(params[:id].to_i)
+
 		@user = current_userdb
 		if @user.usertype == 2
 			@books=@user.books
@@ -26,6 +24,7 @@ class UsersController < ApplicationController
 		end
 
 	end
+
 	def delete
 	end
 
@@ -41,6 +40,7 @@ class UsersController < ApplicationController
         flash[:success] = 'Successfully removed!'
 		redirect_to controller: :users, action: :show, id: params[:id]
 	end
+
 	def update
 		@user = current_userdb
 		if params[:user_update].present?
@@ -48,25 +48,15 @@ class UsersController < ApplicationController
 				flash[:success] = "Successfullly updated"
 				#redirect_to controller: :users, action: :edit, id: params[:id]
 			else
-				flash[:failure]
+				flash[:failure] = "There is no way this fails"
 				#redirect_to controller: :users, action: :edit, id: params[:id]
 			end
 		end
 		redirect_to controller: :users, action: :edit, id: params[:id]
 	end
+
 	def update_params
 		params.require(:user_update).permit(:usermail,:age,:address,:mobile)	
 	end
-=begin	def due_date
-		
-		@books = Book.all
-		@books.each do |b| 
-			
-			time = Time.now.getutc
-			if b.userdb_id != 0
-				b.due_date = "5"
-			end
-		end
-	end
-=end
+
 end

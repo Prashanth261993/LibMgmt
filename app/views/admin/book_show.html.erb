@@ -13,7 +13,7 @@
 		<span class="userspan" id="userspan1">
 			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password" %>
+				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
 				<%= link_to "Logout", destroy_userdb_session_path, method: :delete, :class => 'navbar-link'  %>
 			</span>
 		</span>
@@ -24,7 +24,6 @@
 				<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
 				<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
 				<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
-				<li><%= link_to "Experiment", live_search_books_path %></li>
 
 			</div>
 

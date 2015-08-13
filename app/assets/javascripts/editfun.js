@@ -1,15 +1,17 @@
 function editProfile()
 {	
-	var x = document.getElementsByClassName('profileeditbutton');
-	for (var k =0; k<x.length; k++) 
+	var button = document.getElementsByClassName('profileeditbutton');
+	for (var k =0; k<button.length; k++) 
 	{
-	    x[k].addEventListener("click", nextClickListener);
-
-
+	    button[k].addEventListener("click", nextClickListener);
+        var sibling_form = button[k].parentNode.parentNode.childNodes[3].childNodes[0];
+        if(!sibling_form.value){
+            button[k].value = "Add";
+        }
+        
 
 	}
 
-	document.getElementById("updateprofile").addEventListener("click", updateProfile);
 }
 function nextClickListener()
 {
@@ -19,15 +21,6 @@ function nextClickListener()
 
 }
 
-
-function updateProfile()
-{
-	var request = new XMLHttpRequest(); 
-	request.onload = callback; 
-	request.open("post", "http://localhost:3000/request"); 
-	request.setRequestHeader("Content-Type", "application/json"); 
-	request.send('{"my_data":"back to basics"}');
-}
 
 function placeCaretAtEnd(el) {
     el.focus();
