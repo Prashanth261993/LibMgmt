@@ -32,10 +32,10 @@ class UsersController < ApplicationController
 		book = Book.find(params[:book_id].to_i)
 		book.update_attributes!(userdb_id: 0)
 		activity_record = Activity.new
-		activity_record.user_name = current_user.email
+		activity_record.user_name = current_userdb.email
 		activity_record.book_name = book.title
 		activity_record.taken = false
-		activity_record.userdb_id = current_user.id
+		activity_record.userdb_id = current_userdb.id
 		activity_record.save
         flash[:success] = 'Successfully removed!'
 		redirect_to controller: :users, action: :show, id: params[:id]
