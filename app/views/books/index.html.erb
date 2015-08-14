@@ -15,12 +15,110 @@
 		<span class="userspan" id="userspan1">
 			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
-				<%= link_to "Logout", destroy_userdb_session_path, method: :delete, :class => 'navbar-link'  %>
+				<%= link_to "Change Password",edit_user_registration_path,method: :get %>
+				<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 			</span>
 		</span>
 	</div>
 	
+	<% if @user.usertype == 1 %>
+
+		<div class="sidemenu">
+			<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
+			<li><%= link_to "Add/Remove Book", books_path(id: @user.id) %></li>
+			<li><%= link_to "View/Remove User", users_path %></li>
+			<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
+		</div>
+
+		<div class="inner-container">
+
+				<div class="removebook"  id="removebookdiv">
+							
+					<div class="removediv" >
+						
+						<div id="flash">
+				  		<% flash.each do |key, value| %>
+				      	<div class="flash-box-<%= key %>" id="flash"><%= value %></div>
+				  	 	<% end %>
+				  	 	</div>
+
+						<h2>Remove Book(s)</h2>
+						<%= form_for :book ,url: search_books_path, :method => 'post', html:{:id=>'books_search', :class=>"search_form"} do |b|%>
+
+						    <%= b.text_field :search , :id=>"search_input"%>
+						    <%= b.submit ("Search") %>
+						<% end %>
+						 <%if @books.size == 0%>
+						 	 <p class="search-result">No matches are available</p>
+						  <%else%>
+						 <%= form_tag remove_books_books_path, :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
+
+						<table class="booktable">
+
+						  <tr class="tablehead">
+						    <th>Title</th>
+						    <th>Author</th>
+						    <th>Price</th>
+						    <th>Return</th>
+						  </tr>
+						  
+						<% @books.each do |book| %>
+						  <tr>
+						    <td><%= book.title %></td>
+						    <td><%= book.author %></td>
+						    <td><%= book.price %></td>
+
+						     <td><% if book.user_id == 0 %>
+						     	<%= check_box_tag  "activated[]", book.id %> 
+						     	 <% else %>
+						     	 <span> Can't be removed now</span>
+						     	 <% end %>
+						     </td>
+						  </tr>
+						<% end %>
+
+						</table>
+
+						<%= submit_tag("Remove Book(s)") %>
+
+						<% end %>
+						<%end%>
+						<a href="#" id="addbookshow"><< Add Book</a>
+					</div>
+				</div>
+
+				<div class="addbook" id="addbookdiv">
+
+					<h2> ADD BOOK</h2>
+
+					<%= form_for :book, url: books_path(id: @user.id), method: 'post', html:{:id=>'addbookform'} do |f| %>
+				 
+						  <p>
+						    <%= f.text_field :title, :placeholder=>'title', :id=>'title' %>
+						    <span id="titleerror" class="validerror">*Enter a valid age </span>
+						  </p>
+
+						  <p>
+						    <%= f.text_field :author, :placeholder=>'author'%>
+						  </p>
+						  <p>
+						    <%= f.text_field :price, :placeholder=>'price', :id=>'price'%>
+						    <span id="priceerror" class="validerror">*Enter a valid mobile no </span>
+						  </p> 
+						 
+						  <p>
+						    <%= f.submit :AddBook!, :id=>'addbooksubmit' %>
+						    <span id="Adderror" class="validerror">*Enter all mandatory fields </span>
+						  </p>
+
+					<% end %>
+
+					<%= link_to "Remove Book >>", books_path(id: @user.id) %>
+
+				</div>
+			</div>
+
+	<% else %>
 	<div class="sidemenu">
 		<li><%= link_to "My Bag", user_path(id: @user.id) %></li>
 		<li><%= link_to "Fill My Bag", books_path(id: @user.id) %></li>
@@ -48,7 +146,7 @@
 			 <%if @books.size == 0%>
 			 	 <p class="search-result">No matches are available</p>
 			  <%else%>
-			 <%= form_tag books_path(id: @user.id), :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
+			 <%= form_tag add_books_to_user_books_path(id: @user.id), :method=>'post', :class =>'borrowbookform', :id=>"render_form" do %>
 
 			<table class="booktable">
 			  <tr class="tablehead">
@@ -64,7 +162,7 @@
 			    <td><%= book.author %></td>
 			    <td><%= book.price %></td>
 
-			     <td><% if book.userdb_id == 0 %>
+			     <td><% if book.user_id == 0 %>
 			     	<%= check_box_tag  "activated[]", book.id %> 
 			     	 <% else %>
 			     	 <span> Not Available</span>
@@ -74,12 +172,13 @@
 			<% end %>
 			</table>
 
-			<%= text_field_tag :userdb_id,  @user.id, :style=>'display:none;'  %>
+			<%= text_field_tag :user_id,  @user.id, :style=>'display:none;'  %>
 			<%= submit_tag("ADD TO MY BAG") %>
 			<% end %>
 			<%end%>
 
 		</div> 
+		<% end %>
 
 	</div>
 

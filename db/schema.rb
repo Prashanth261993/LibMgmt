@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812063429) do
+ActiveRecord::Schema.define(version: 20150814061320) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "user_name"
     t.string   "book_name"
     t.boolean  "taken"
-    t.integer  "userdb_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 20150812063429) do
     t.string   "title"
     t.string   "author"
     t.float    "price"
-    t.integer  "userdb_id",  default: 0
+    t.integer  "user_id",    default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  create_table "userdbs", force: :cascade do |t|
-    t.string   "usermail"
+  create_table "users", force: :cascade do |t|
+    t.string   "user_name"
     t.string   "password"
     t.integer  "age"
     t.string   "address"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20150812063429) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "userdbs", ["email"], name: "index_userdbs_on_email", unique: true
-  add_index "userdbs", ["reset_password_token"], name: "index_userdbs_on_reset_password_token", unique: true
-  add_index "userdbs", ["usermail"], name: "index_userdbs_on_usermail", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["user_name"], name: "index_users_on_user_name", unique: true
 
 end

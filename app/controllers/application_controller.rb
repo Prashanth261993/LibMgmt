@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 	  end
 
 	  def check_if_admin
-	  	raise "not authorized" unless AdminPolicy.new(@user).is_admin? 
+	  	raise "not authorized" unless UserPolicy.new(@user).is_admin? 
 	  end
 
 

@@ -14,8 +14,8 @@
 		<span class="userspan" id="userspan1">
 			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
-				<%= link_to "Logout", destroy_userdb_session_path ,method: :delete %>
+				<%= link_to "Change Password",edit_user_registration_path,method: :get %>
+				<%= link_to "Logout", destroy_user_session_path ,method: :delete %>
 			</span>
 		</span>
 	</div>

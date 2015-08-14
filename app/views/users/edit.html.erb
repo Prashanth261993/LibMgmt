@@ -13,9 +13,9 @@
 		<span class="userspan" id="userspan1">
 			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-			<% if userdb_signed_in? %>
+			<% if user_signed_in? %>
 					<%= link_to "Change Password" %>
-					<%= link_to "Logout", destroy_userdb_session_path ,method: :delete %>
+					<%= link_to "Logout", destroy_user_session_path ,method: :delete %>
 			<% end %>
 				</span>
 			</span>
@@ -42,7 +42,7 @@
 
 			  <tr>
 			    <td>Mail</td>
-			    <td id="mail1"><%= f.text_field :usermail, :value=>@user.usermail, :disabled=>"disabled" %></td>
+			    <td id="mail1"><%= f.text_field :user_name, :value=>@user.user_name, :disabled=>"disabled" %></td>
 			    <td ><input class="profileeditbutton" id="b1" type="button" value="edit"></td>
 			  </tr>
 

@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
 	attr_accessor :due_date
-	belongs_to :userdb
+	belongs_to :user
 
 	def self.search(search)
       if search

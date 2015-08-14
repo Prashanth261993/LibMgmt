@@ -1,43 +1,45 @@
 class BooksController < ApplicationController
 
-before_action :authenticate_userdb!,  :except => [:search,:live_search]
+before_action :authenticate_user!,  :except => [:search,:live_search]
 
 	def index
-		#@user = Userdb.find(params[:id].to_i)
-		@user = current_userdb
+		@user = current_user
 		@books = Book.all
 	end
 
 	def search
-		
-		#@user = Userdb.find(session[:user_id].to_i)
-		@user = current_userdb
+		@user = current_user
 		@books = Book.where("title LIKE ? OR author LIKE ?" ,"%#{params[:book][:search]}%","%#{params[:book][:search]}%")
-		
-		#@books = Book.where("title LIKE %#{params[:book][:search]}% OR author LIKE %#{params[:book][:search]}%.to_s" )
-    	#render 'index'
-    	#render json: @books
     	render 'index'
   	end
 	
 
 	def create 
+		@user = current_user
+		@book = Book.create(book_params)
+		check_if_admin
+		flash[:success] = "Book successfully added"
+		redirect_to books_path(id: @user.id)
+	end
+
+	def book_params
+		params.require(:book).permit(:title, :author, :price)
+	end
+
+	def add_books_to_user
 		if request.post? 
 
-			activated_ids = params[:activated].collect {|id| id.to_i} if params[:activated] 
-		 #seen_ids = params[:seen].collect {|id| id.to_i} if params[:seen] 
-		 	userid = params[:userdb_id]
+			activated_ids = params[:activated].map(&:to_i).compact.uniq if params[:activated].present? 
+		 	userid = params[:user_id]
 
 			if activated_ids 
 			 	activated_ids.each do |id| 
 			 	book = Book.find_by_id(id) 
-			 	activity_record = Activity.new
-			 	activity_record.user_name = current_userdb.email
-				activity_record.book_name = book.title
-				activity_record.taken = true
-				activity_record.userdb_id = userid
-				activity_record.save
-			 	book.update_attributes!(userdb_id: userid.to_i)
+
+			 	ActiveRecord::Base.transaction do
+					 	activity_record = Activity.create({:user_name => current_user.email, :book_name => book.title, :taken => true, :user_id => current_user.id})
+					 	book.update_attributes!(user_id: userid.to_i)
+					 end
 			 	flash[:success] = "Book(s) added to your bag successfully"
 			 	end 
 			
@@ -47,10 +49,7 @@ before_action :authenticate_userdb!,  :except => [:search,:live_search]
 	end
 
 	def live_search
-		#binding.pry
-		@user = current_userdb
-		#@books = Book.all
-		#if @books.size != 
+		@user = current_user
 		if params[:search].present?
 			@books = Book.search(params[:search])
 		else
@@ -66,10 +65,24 @@ before_action :authenticate_userdb!,  :except => [:search,:live_search]
 	end
 
 	def show 
-		@user = current_userdb
+		@user = current_user
 		@books = Book.all
 	end
 
+	def remove_books
+			@user = current_user
+			check_if_admin
+			activated_ids = params[:activated].map(&:to_i).compact.uniq if params[:activated].present? 
+		 
+			if activated_ids 
+			 	activated_ids.each do |id| 
+				 	book = Book.find_by_id(id) 
+				 	book.destroy
+			 	end 
+			flash[:success] = "Successfully removed"
+		 	end
 
+		 	redirect_to books_path(id: userid)
+	end
 
 	end

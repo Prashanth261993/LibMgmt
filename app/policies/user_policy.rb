@@ -1,4 +1,4 @@
-class AdminPolicy 
+class UserPolicy 
   attr_reader :user
 
   def initialize(user)
@@ -28,6 +28,6 @@ class AdminPolicy
 
     end
   end
-
 end
+
 end

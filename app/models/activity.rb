@@ -1,3 +1,3 @@
 class Activity < ActiveRecord::Base
-	belongs_to :userdb
+	belongs_to :user
 end

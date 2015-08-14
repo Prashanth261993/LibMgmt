@@ -13,7 +13,7 @@
 	    <td><%= book.author %></td>
 	    <td><%= book.price %></td>
 
-	     <td><% if book.userdb_id == 0 %>
+	     <td><% if book.user_id == 0 %>
 	     	<%= check_box_tag  "activated[]", book.id %> 
 	     	 <% else %>
 	     	 <span> Can't be removed now</span>

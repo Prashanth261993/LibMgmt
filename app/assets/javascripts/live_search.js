@@ -33,7 +33,7 @@ $(document).ready(function(){
       	var $title = $('<td>').text(data[obj].title);
         var $author = $('<td>').text(data[obj].author);
         var $price = $('<td>').text(data[obj].price);
-        if (data[obj].userdb_id == 0){
+        if (data[obj].user_id == 0){
           //var $available = $('input').attr("type","checkbox").attr("name","activated[]").attr("id","activated_").attr("value",data[obj].id);
             $available.append($('<input>').attr({
               type:"checkbox",

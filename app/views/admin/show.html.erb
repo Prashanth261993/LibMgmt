@@ -16,16 +16,16 @@
 		<span class="userspan" id="userspan1">
 			<%= @user.email %> 
 			<span class="logoutspan" id="logout1">
-				<%= link_to "Change Password",edit_userdb_registration_path,method: :get %>
-				<%= link_to "Logout", destroy_userdb_session_path, method: :delete, :class => 'navbar-link'  %>
+				<%= link_to "Change Password",edit_user_registration_path,method: :get %>
+				<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 			</span>
 		</span>
 	</div>
 
 			<div class="sidemenu">
 				<li><%= link_to "Recent Activity", user_path(id: @user.id) %></li>
-				<li><%= link_to "Add/Remove Book", book_show_admin_path(id: @user.id) %></li>
-				<li><%= link_to "View/Remove User", user_show_admin_path(id: @user.id) %></li>
+				<li><%= link_to "Add/Remove Book", books_path(id: @user.id) %></li>
+				<li><%= link_to "View/Remove User", users_path %></li>
 				<li><%= link_to "Add User", user_post_admin_path(id: @user.id) %></li>
 
 			</div>
@@ -63,7 +63,7 @@
 						  <h2><%= Time.now.to_date - 1 %></h2>
 						  <div>
 
-						    <% @activities_yest.each do |a| %>
+						    <% @activities_yesterday.each do |a| %>
 
 						  	  	<% if a.taken == false %>
 							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
@@ -81,7 +81,7 @@
 						  <h2><%= Time.now.to_date - 2 %></h2>
 						  <div>
 
-						    <% @activities_dayb4.each do |a| %>
+						    <% @activities_daybefore.each do |a| %>
 
 						  	  	<% if a.taken == false %>
 							    <p class="returnfeed"><span class="userfeed"><%= a.user_name %></span> returned <span class="bookfeed"><%= a.book_name %></span> <span class="timefeed"><%= a.updated_at.in_time_zone("Asia/Kolkata").strftime("%I:%M %p") %></span></p>
