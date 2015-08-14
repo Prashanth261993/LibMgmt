@@ -8,6 +8,7 @@ Rails.application.config.assets.precompile += %w( accordian.js )
 Rails.application.config.assets.precompile += %w( admin_book.js )
 Rails.application.config.assets.precompile += %w( admin_user_form.js )
 Rails.application.config.assets.precompile += %w( live_search.js )
+Rails.application.config.assets.precompile += %w( popup.js )
 
 
 # Add additional assets to the asset load path

@@ -30,3 +30,4 @@ class AdminPolicy
   end
 
 end
+end

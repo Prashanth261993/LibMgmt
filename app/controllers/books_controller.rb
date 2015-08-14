@@ -48,7 +48,7 @@ before_action :authenticate_userdb!,  :except => [:search,:live_search]
 
 	def live_search
 		#binding.pry
-		@user = current_user
+		@user = current_userdb
 		#@books = Book.all
 		#if @books.size != 
 		if params[:search].present?
